@@ -40,7 +40,7 @@ class DrinkIntegrationTest {
         mockMvc.perform(post("/drinks")
                         .param("name", "Nocco")
                         .param("flavour", "Black Orange")
-                        .param("price", "24.90")
+                        .param("price", "25.00")
                         .param("expireDate", Date.valueOf(LocalDate.now().plusDays(10)).toString()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/drinks"));
@@ -55,7 +55,7 @@ class DrinkIntegrationTest {
         Drink saved = drinkRepository.save(new Drink(
                 "Powerking",
                 "Strawberry",
-                new BigDecimal("14.90"),
+                new BigDecimal("15.00"),
                 Date.valueOf(LocalDate.now().plusDays(30))
         ));
 
@@ -64,7 +64,7 @@ class DrinkIntegrationTest {
                 .andExpect(view().name("drink-findbyid"))
                 .andExpect(model().attributeExists("drink"))
                 .andExpect(model().attribute("drink", hasProperty("id", is(saved.getId()))))
-                .andExpect(model().attribute("drink", hasProperty("name", is("Redbull"))));
+                .andExpect(model().attribute("drink", hasProperty("name", is("Powerking"))));
     }
 
     @Test
