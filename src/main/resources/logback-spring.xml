@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Loggfil lokalt i projektet (ska ignoreras i git) -->
+    <property name="LOG_DIR" value="logs"/>
+    <property name="LOG_FILE" value="${LOG_DIR}/javatools.log"/>
+
+    <!-- Konsoll för Spring och allt annat -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Filappender för dina egna klasser -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rotera dagligen -->
+            <fileNamePattern>${LOG_DIR}/javatools.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- behåll 14 dagar -->
+            <maxHistory>14</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Dina paket: bara till FIL (inte till konsoll) -->
+    <logger name="se.iths.yunus.javatools" level="INFO" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <!-- Root: allt annat (Spring etc.) till konsoll -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
