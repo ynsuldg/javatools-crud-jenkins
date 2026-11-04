@@ -10,6 +10,7 @@ import se.iths.yunus.javatools.model.Drink;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -25,7 +26,7 @@ class DrinkValidatorTest {
 
     @Test
     void validDrinkShouldPass() {
-        Drink drink = new Drink("Nocco", "Orange", new BigDecimal("25.00"), Date.valueOf("2026-03-21"));
+        Drink drink = new Drink("Nocco", "Orange", new BigDecimal("25.00"), Date.valueOf(LocalDate.now().plusYears(1)));
         assertDoesNotThrow(() -> validator.validate(drink));
     }
 
