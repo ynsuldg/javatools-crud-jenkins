@@ -2,7 +2,7 @@ name: Java CI/CD with Maven and Docker
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
 
 jobs:
@@ -34,4 +34,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ynsuldg/java-tools:1.0.0
+          tags: ynsuldg/javatools-crud-jenkins:1.0.0
